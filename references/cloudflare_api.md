@@ -82,33 +82,21 @@ python3 deploy.py \
 
 ## Framer
 
-**Why semi-automated:** Framer does not have a public REST API for site hosting, file management, or redirect rules. Their developer APIs are limited to editor plugins and the CMS. There is no endpoint to programmatically upload files or manage redirects.
+**Why instructions-only:** Framer has no public REST API for file hosting, redirect management, or any hosting configuration. Their developer tools are limited to editor plugins and the CMS API.
 
-**What Samvida does:**
-1. Uploads `llms.txt` to a GitHub Gist (stable, public, free hosting)
-2. Outputs the raw Gist URL
-3. Gives step-by-step instructions to add a redirect in Framer's dashboard
+**No credentials needed.** Samvida outputs your llms.txt content and three options:
 
-**How to get credentials:**
-- **GitHub Token** (optional but recommended) — github.com/settings/tokens → Generate new token → `gist` scope only
-- If no token provided, Samvida prints the llms.txt content and instructions to host it manually
+- **Option A** (Pro/Business plans): Upload as a static file directly in Framer → Site Settings → Static Files. Serves at `/llms.txt` natively.
+- **Option B** (all plans): Host the file anywhere publicly (Gist, Pastebin, R2), then add a redirect rule in Framer → Site Settings → Redirect Rules → `/llms.txt` → your hosted URL → 301.
+- **Option C** (if DNS via Cloudflare): Use the Cloudflare Workers provider instead — zero redirect, direct serve.
 
 **CLI:**
 ```bash
 python3 deploy.py \
   --provider framer \
   --llms-txt /tmp/samvida_llms.txt \
-  --domain example.com \
-  --github-token YOUR_GITHUB_TOKEN
+  --domain example.com
 ```
-
-**Manual redirect steps in Framer:**
-1. Open Framer project → top-left menu → Site Settings
-2. General tab → scroll to "Redirect Rules"
-3. Add rule: From `/llms.txt` → To `<gist-raw-url>` → Type: 301
-4. Save → Publish
-
-**Alternative:** If your Framer site's DNS goes through Cloudflare (you manage the DNS), use the Cloudflare Workers provider instead for a fully automated zero-redirect deploy.
 
 ---
 

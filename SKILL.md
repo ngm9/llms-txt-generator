@@ -275,26 +275,19 @@ Best for: sites hosted on Webflow (webflow.io or custom domain via Webflow hosti
 
 ---
 
-#### 9c — Framer (semi-automated)
+#### 9c — Framer (instructions-only)
 
-Best for: sites hosted on Framer. Framer has no public REST API, so Samvida hosts the file externally and guides the user to add a redirect in Framer's dashboard.
-
-> "Framer doesn't have a public API for file hosting, so here's what we'll do:
-> 1. I'll host your llms.txt on GitHub Gist (free, stable, public)
-> 2. You add a one-line redirect rule in Framer — takes about 2 minutes
->
-> Optional: share your **GitHub token** (github.com/settings/tokens → gist scope only) so I can auto-create the Gist. Otherwise I'll give you the content to paste manually."
+Framer has no public REST API for file hosting or redirect management. No credentials needed — just run the script and relay the output.
 
 ```bash
 ~/.virtualenvs/samvida/bin/python3 \
   ~/.openclaw/workspace/samvida/scripts/deploy.py \
   --provider framer \
   --llms-txt /tmp/samvida_llms.txt \
-  --domain "{domain}" \
-  --github-token "{github_token}"   # optional
+  --domain "{domain}"
 ```
 
-**On completion:** Parse `SAMVIDA_HOSTED_URL:{url}` from script output and share the Gist URL with the user along with the redirect steps.
+The script outputs three options (A/B/C) with step-by-step instructions and prints the full llms.txt content for the user to save. Relay all of it clearly to the user.
 
 ---
 
