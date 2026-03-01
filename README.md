@@ -103,13 +103,14 @@ Samvida's output includes `## Compliance` and `## Reviews` sections — certific
 
 | Credential | Required | When |
 |---|---|---|
-| `ANTHROPIC_API_KEY` | ✅ Always | Used by Claude to generate the llms.txt output |
 | Cloudflare API Token + Account ID + Zone ID | ⚡ Deploy only | Only if deploying via Cloudflare Workers |
 | Webflow Site API Token | ⚡ Deploy only | Only if deploying via Webflow |
 
-**Credentials are prompted at runtime and never stored by the skill.**
+**No API key required.** Samvida uses your configured OpenClaw LLM for generation — whatever model you've set up in OpenClaw is what runs.
 
-Crawl and generation work without any deploy credentials — you only need them when you say `deploy`.
+**Deploy credentials are prompted at runtime and never stored by the skill.** Crawl and generation work with no credentials at all — you only need them when you say `deploy`.
+
+**Data note:** crawled pages may include publicly available contact details (emails, names). This content is sent to your configured OpenClaw LLM provider as part of generation.
 
 ## Deploy
 
